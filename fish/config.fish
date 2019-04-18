@@ -21,10 +21,14 @@ if not set -q abbrs_initialized
   abbr gst 'git stash'
  abbr cwtr 'curl https://wttr.in/'
  abbr hc 'herbstclient'
+abbr mksh 'cat /home/david/tmp/shell.nix > shell.nix && cat /home/david/tmp/envrc > .envrc'
+ alias f 'fff'
   echo 'Done'
 end
 
-fish-nix-shell --info-right | source
+#fish-nix-shell --info-right | source
 set fish_greeting
 
 set PATH ~/scripts $PATH
+# direnv hook fish  | source
+eval (direnv hook fish)

@@ -1,20 +1,19 @@
 with import <nixpkgs> {};
 let customPlugins = {
   nvim-r = vimUtils.buildVimPlugin {
-    name = "nvim-r";
+    name = "nvim-r-git-04-19";
     src = fetchgit {
-      url= "https://github.com/jalvesaq/nvim-r";
-      rev =  "c53b5a402a26df5952718f483c7461af5bb459eb";
-      sha256 = "13xbb05gnpgmyaww6029saplzjq7cq2dxzlxylcynxhhyibz5ibv";
-      };
-    buildInputs = [ which vim  zip];
+       url= "https://github.com/jalvesaq/nvim-r";
+  rev =  "c53b5a402a26df5952718f483c7461af5bb459eb";
+  sha256 = "13xbb05gnpgmyaww6029saplzjq7cq2dxzlxylcynxhhyibz5ibv";
   };
+};
+
 };
 in vim_configurable.customize {
     name = "vim";
     vimrcConfig.customRC = ''
       set relativenumber
-      set backspace=indent,eol,start
       set mouse=
       set history=500
       filetype plugin on
@@ -91,7 +90,6 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
       let g:multi_cursor_quit_key = '<Esc>'
       vmap Si S(i_<esc>f)
-let g:vimtex_view_method = 'zathura'
     '';
     # Use the default plugin list shipped with nixpkgs
     vimrcConfig.vam.knownPlugins = pkgs.vimPlugins // customPlugins;
@@ -99,7 +97,6 @@ let g:vimtex_view_method = 'zathura'
         { names = [
             # Here you can place all your vim plugins
             # They are installed managed by `vam` (a vim plugin manager)
-            "auto-pairs"
             "Syntastic"
             "vim-nix"
             "surround"
@@ -107,10 +104,8 @@ let g:vimtex_view_method = 'zathura'
             "vim-markdown"
             "vim-multiple-cursors"
             "vim-fugitive"
-            "vimtex"
             "ctrlp"
             "goyo"
-            "nvim-r"
         ]; }
     ];
 }

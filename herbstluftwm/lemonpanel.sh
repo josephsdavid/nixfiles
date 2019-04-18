@@ -20,7 +20,7 @@ nmon=$(herbstclient list_monitors | wc -l)
 	x="${geometry[0]}"
 	y="${geometry[1]}"
 	width="${geometry[2]}"
-((bottom))  
+((bottom))
 # padding
 printf '%dx%d%+d%+d' $width $height $x $y
 function uniq_linebuffered() {
@@ -49,16 +49,17 @@ sm="%{F$RED}  %{F-}"
 sv="%{F$BLU}  %{F-}"
 sd="%{F$VLT}  %{F-}"
 
+source ~/.config/lemonbar/music
 # functions
 
 set -f
-	
+
 function uniq_linebuffered() {
     awk -W interactive '$0 != l { print ; l=$0 ; fflush(); }' "$@"
 }
 
 # events
-{   
+{
     # now playing
     mpc idleloop player | cat &
     mpc_pid=$!
@@ -69,13 +70,14 @@ function uniq_linebuffered() {
     done > >(uniq_linebuffered) &
     bat_pid=$!
 
+
     # volume
     while true ; do
         echo "vol $(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')"
 	sleep 1 || break
     done > >(uniq_linebuffered) &
     vol_pid=$!
-    
+
     # date
     while true ; do
         date +'date_min %b %d %A '%{F$RED}%{F-}' %H:%M'
@@ -87,7 +89,7 @@ function uniq_linebuffered() {
     herbstclient --idle
 
     # exiting; kill stray event-emitting processes
-    kill $mpc_pid $vol_pid $date_pid $bat_pid
+    kill $mpc_pid $vol_pid $date_pid $bat_pid $spot_pid
 } 2> /dev/null | {
     TAGS=( $(herbstclient tag_status $monitor) )
     unset TAGS[${#TAGS[@]}]
@@ -118,9 +120,9 @@ function uniq_linebuffered() {
             esac
             echo -n " ${i:1} "
         done
-	
+
 	echo -n "%{c}$st%{F$GRA}${windowtitle//^/^^} %{F-}"
-	
+
         # align right
         echo -n "%{r}"
         echo -n "$sm"
@@ -132,7 +134,7 @@ function uniq_linebuffered() {
         echo ""
         # wait for next event
         read line || break
-        cmd=( $line ) 
+        cmd=( $line )
         # find out event origin
         case "${cmd[0]}" in
             tag*)
@@ -174,7 +176,7 @@ function uniq_linebuffered() {
                     us) FLAGS+=( -variant altgr-intl ) ;;
                     *) ;;
                 esac
-                setxkbmap "${FLAGS[@]}" "$layout" 
+                setxkbmap "${FLAGS[@]}" "$layout"
             ;;
         use_*) herbstclient chain , focus_monitor "$monitor" , use "${line#use_}" ;;
         next)  herbstclient chain , focus_monitor "$monitor" , use_index +1 --skip-visible ;;

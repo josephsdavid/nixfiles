@@ -9,9 +9,11 @@
 #
 #
 {
+
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    ./hardware-configuration.nix
+    ./direnv.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -20,8 +22,8 @@
 boot.kernelModules = [ "coretemp" "kvm-intel" "modprobe" ];
 # Kernel options
 # quick fix for nixos 19.03
-boot.kernelPackages = pkgs.linuxPackages_4_19;
-#boot.kernelPackages = pkgs.linuxPackages_latest;
+#boot.kernelPackages = pkgs.linuxPackages_4_19;
+boot.kernelPackages = pkgs.linuxPackages_latest;
    networking.hostName = "nixon"; # Define your hostname.
  #  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 networking.networkmanager.enable = true;
@@ -46,45 +48,39 @@ networking.networkmanager.enable = true;
     buildCores = 0;
     gc = {
       automatic = true;
-      dates = "06:15";
+      dates = "07:15";
       options = "--delete-older-than 30d";
     };
   };
-services.xserver.enable = true;
-services.xserver.windowManager.herbstluftwm.enable = true;
-#services.xserver.desktopManager.xfce.enable = true;
-services.xserver.videoDrivers = [ "nvidia" ];
-services.xserver.libinput.enable = true;
-#services.compton = {
-#	enable = true;
-#	fade = false;
-#	inactiveOpacity = "1.0";
-#	shadow = false;
-#};
   # Set your time zone.
    time.timeZone = "America/Chicago";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-   environment.systemPackages = with pkgs; [
+  environment.variables = {
+    EDITOR = "vim";
+    VISUAL = "vim";
+  };
+  environment.systemPackages = with pkgs; [
      wget 
      termite
+(let src = builtins.fetchGit "https://github.com/target/lorri"; in import src { inherit src pkgs; })
      ranger 
-vim
+     vim
      gcc
      pandoc
-	neofetch 
-	git 
-	herbstluftwm 
-	compton 
-	dzen2 
-	feh 
-	arandr
-	acpi
-	tmux
-	imagemagick
-	lm_sensors
-        vlc
+     neofetch 
+     git 
+     herbstluftwm 
+     compton 
+     dzen2 
+     feh 
+     arandr
+     acpi
+     tmux
+     imagemagick
+     lm_sensors
+     vlc
    ];
 fonts.fonts = with pkgs; [
   nerdfonts
@@ -119,8 +115,77 @@ allowUnfree = true;
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
   # List services that you want to enable:
+# Database services:
+#services = {
+ # openssh = {
+  #  enable = true;
+#    permitRootLogin = "no";
+#  };
 
-  # Enable the OpenSSH daemon.
+#  printing = {
+#    enable = true;
+#  };
+
+#  upower = {
+#    enable = true;
+#  };
+
+  # DAtabases
+#  neo4j = {
+#    enable = true;
+#    package = pkgs.neo4j;
+#  };
+
+#  mysql = {
+#    enable = true;
+#    package = pkgs.mysql;
+#  };
+
+#  mongodb = {
+#    enable = true;
+#    package = pkgs.mongodb;
+#  };
+
+#  xserver = {
+#    enable = true;
+
+#    windowManager = {
+#      herbstluftwm.enable = true;
+#    };
+
+#    videoDrivers = [ "nvidia" ];
+#    libinput.enable = true;
+#  };
+
+#  compton = {
+#    enable = true;
+#    fade = false;
+#    inactiveOpacity = "1.0";
+#    shadow = false;
+#  };
+
+#};
+ # extraServerConfig = ''
+#  dbms.memory.heap.initial_size=16g
+#dbms.memory.heap.max_size=16g
+#  '';
+
+services.xserver.enable = true;
+services.xserver.windowManager.herbstluftwm.enable = true;
+#services.xserver.desktopManager.xfce.enable = true;
+services.xserver.videoDrivers = [ "nvidia" ];
+services.xserver.libinput = {
+  enable = true;
+  naturalScrolling = false;
+};
+#services.xserver.synaptics.enable = true;
+services.compton = {
+	enable = true;
+	fade = false;
+	inactiveOpacity = "1.0";
+	shadow = false;
+};
+ #  Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "no";
 #services.tlp.enable = true;
@@ -136,7 +201,10 @@ services.upower.enable = true;
    services.printing.enable = true;
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio ={
+    enable = true;
+    support32Bit = true;
+  };
   # hardware services
    hardware.cpu.intel.updateMicrocode = true;
  # disable card with bbswitch by default since we turn it on only on demand!
@@ -144,11 +212,15 @@ services.upower.enable = true;
   # install nvidia drivers in addition to intel one
  # hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
  # hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
-
+# for steam:
+#hardware.opengl.driSupport32Bit = true;
 
 # Some bash programs
-  programs.bash.enableCompletion = true;
-  programs.fish.enable=true;
+programs.bash = {
+  enableCompletion = true;
+};
+programs.fish.enable=true;
+programs.vim.defaultEditor = true;
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
   # services.xserver.layout = "us";
@@ -170,9 +242,11 @@ users.users.david = {
 	isNormalUser=true;
 	home = "/home/david";
 	description = "David Josephs";
-        extraGroups = [ "wheel" "power" "networkmanager" "audio"];
+        extraGroups = [ "wheel" "power" "networkmanager" "audio" "docker"];
         shell = "/run/current-system/sw/bin/fish";
 };
+
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you

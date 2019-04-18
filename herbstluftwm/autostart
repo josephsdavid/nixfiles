@@ -54,3 +54,5 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
 #    monitor=0
     "$panel" $monitor &
 done
+
+

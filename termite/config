@@ -44,6 +44,11 @@ cursor_shape = block
 #cursor = #202421
 #cursor_foreground = #d5d3c7
 
+# The foreground for selections
+cursor_foregroung =  #2f2f2f
+
+# The background for selections
+cursor = #93a1a1
 #foreground = #dcdccc
 foreground   =    #202421
 #foreground_bold = #ffffff

@@ -18,8 +18,12 @@
     packages =with pkgs; [
       (import ./vim.nix)
       htop
+      xdotool
+      xsv
       firefox-devedition-bin
+      fff
       hexchat
+      xclip
       R
       rPackages.knitr
       rPackages.rmarkdown
@@ -27,6 +31,7 @@
       signal-desktop
       slack
       ffmpeg
+      playerctl
       lemonbar-xft
       zoom-us
       dmenu
@@ -35,7 +40,11 @@
       libnotify
       google-chrome
       unzip
+      p7zip
       encryptr
+      scid-vs-pc
+      stockfish
+#      texlive.combined.scheme-full
 #pkgs.rstudio
   ];
 };
@@ -89,14 +98,29 @@ programs = {
     };
   };
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-  services = {
+programs.home-manager.enable = true;
+services = {
+  redshift = {
+    enable = true;
+    latitude = "32.776665";
+    longitude = "-96.796989";
+    brightness = {
+      day = "1";
+      night = "0.8";
+    };
+  #  temperature = {
+   #   day = 6500;
+    #  night = 5000;
+   # };
+  };
+
   dunst = {
     enable = true;
+
     settings = {
       global = {
         browser = "${config.programs.firefox.package}/bin/firefox -new-tab";
-        follow = "mouse";
+        follow = "keyboard";
         font = "Iosevka 12";
         format = "<b>%s</b>\\n%b";
         frame_color = "#555555";
@@ -115,7 +139,7 @@ programs = {
 
       urgency_low = {
         background = "#d5d3c7";
-        foreground = "#202421";
+        foreground = "#705050";
         frame_color = "#202421";
         timeout = 5;
       };
@@ -129,14 +153,14 @@ programs = {
 
       urgency_critical = {
         background = "#d5d3c7";
-        foreground = "#dd5633";
+        foreground = "#705050";
         frame_color = "#dd5633";
         timeout = 0;
       };
 
       shortcuts = {
-        context = "control+grave";
-        close = "control+space";
+        context = "ctrl+grave";
+        close = "ctrl+space";
       };
 };
     };

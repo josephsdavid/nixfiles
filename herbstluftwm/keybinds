@@ -68,9 +68,12 @@ hc keybind XF86MonBrightnessUp spawn xbacklight -inc 10
 hc keybind XF86MonBrightnessDown spawn xbacklight -dec 10
 
 # Spotify control
-hc keybind $Mod-Alt-Down spawn dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-hc keybind $Mod-Alt-Left spawn dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-hc keybind $Mod-Alt-Right spawn dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+#hc keybind $Mod-Alt-Down spawn dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+hc keybind $Mod-Alt-Down spawn playerctl play-pause 
+hc keybind $Mod-Alt-Left spawn playerctl previous
+hc keybind $Mod-Alt-Right spawn playerctl next
+#hc keybind $Mod-Alt-Left spawn dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+#hc keybind $Mod-Alt-Right spawn dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 
 #screenshots and recording
 hc keybind Print spawn scrot -e 'mv $f ~/Pictures/screenshots' 
