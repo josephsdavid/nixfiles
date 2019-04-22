@@ -14,6 +14,7 @@ in vim_configurable.customize {
     name = "vim";
     vimrcConfig.customRC = ''
       set relativenumber
+      set number
       set backspace=indent,eol,start
       set mouse=
       set history=500
@@ -91,7 +92,7 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
       let g:multi_cursor_quit_key = '<Esc>'
       vmap Si S(i_<esc>f)
-let g:vimtex_view_method = 'zathura'
+"let g:vimtex_view_method = 'zathura'
     '';
     # Use the default plugin list shipped with nixpkgs
     vimrcConfig.vam.knownPlugins = pkgs.vimPlugins // customPlugins;
@@ -107,7 +108,7 @@ let g:vimtex_view_method = 'zathura'
             "vim-markdown"
             "vim-multiple-cursors"
             "vim-fugitive"
-            "vimtex"
+            #"vimtex"
             "ctrlp"
             "goyo"
             "nvim-r"

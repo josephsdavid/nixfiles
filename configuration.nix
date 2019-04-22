@@ -4,30 +4,35 @@
 
 { config, pkgs, ... }:
 
-
-
+#let
+#  scientifica = (import <nixpkgs> {}).callPackage ./scifi.nix {};
+#in
 #
 #
 {
-
   imports =
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./direnv.nix
+    ./services.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-boot.kernelModules = [ "coretemp" "kvm-intel" "modprobe" ];
-# Kernel options
-# quick fix for nixos 19.03
-#boot.kernelPackages = pkgs.linuxPackages_4_19;
-boot.kernelPackages = pkgs.linuxPackages_latest;
-   networking.hostName = "nixon"; # Define your hostname.
- #  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-networking.networkmanager.enable = true;
-  # Configure network proxy if necessary
+boot = {
+  loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+  kernelModules = [ 
+    "coretemp"
+    "kvm-intel"
+    "modprobe"
+  ];
+  kernelPackages = pkgs.linuxPackages_latest;
+};
+  networking = {
+    hostName = "nixon";
+    networkmanager.enable = true;
+  };
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
@@ -38,12 +43,12 @@ networking.networkmanager.enable = true;
   #   defaultLocale = "en_US.UTF-8";
   # };
 
-#Let there be music!!
-#
-#
-#other packages
-# other x things
-#
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
   nix = {
     buildCores = 0;
     gc = {
@@ -52,6 +57,7 @@ networking.networkmanager.enable = true;
       options = "--delete-older-than 30d";
     };
   };
+
   # Set your time zone.
    time.timeZone = "America/Chicago";
 
@@ -82,26 +88,25 @@ networking.networkmanager.enable = true;
      lm_sensors
      vlc
    ];
-fonts.fonts = with pkgs; [
-  nerdfonts
-  iosevka
-  ttf-envy-code-r
-  noto-fonts
-  noto-fonts-cjk
-  noto-fonts-emoji
-  liberation_ttf
-  fira-code
-  fira-code-symbols
-  mplus-outline-fonts
-  proggyfonts
-  lemon
+
+   fonts.fonts = with pkgs; [
+     nerdfonts
+     iosevka
+     noto-fonts-cjk
+     noto-fonts-emoji
+     liberation_ttf
+     fira-code
+     fira-code-symbols
+     mplus-outline-fonts
+     proggyfonts
+     lemon
 	];
 # Now let us configure our packages!
 #
   nixpkgs.config = {
 allowUnfree = true;
     firefox = {
-    # enableAdobeFlash = true;
+     enableAdobeFlash = true;
   };
    packageOverrides = pkgs: {
         nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
@@ -115,90 +120,10 @@ allowUnfree = true;
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
   # List services that you want to enable:
-# Database services:
-#services = {
- # openssh = {
-  #  enable = true;
-#    permitRootLogin = "no";
-#  };
-
-#  printing = {
-#    enable = true;
-#  };
-
-#  upower = {
-#    enable = true;
-#  };
-
-  # DAtabases
-#  neo4j = {
-#    enable = true;
-#    package = pkgs.neo4j;
-#  };
-
-#  mysql = {
-#    enable = true;
-#    package = pkgs.mysql;
-#  };
-
-#  mongodb = {
-#    enable = true;
-#    package = pkgs.mongodb;
-#  };
-
-#  xserver = {
-#    enable = true;
-
-#    windowManager = {
-#      herbstluftwm.enable = true;
-#    };
-
-#    videoDrivers = [ "nvidia" ];
-#    libinput.enable = true;
-#  };
-
-#  compton = {
-#    enable = true;
-#    fade = false;
-#    inactiveOpacity = "1.0";
-#    shadow = false;
-#  };
-
-#};
- # extraServerConfig = ''
-#  dbms.memory.heap.initial_size=16g
-#dbms.memory.heap.max_size=16g
-#  '';
-
-services.xserver.enable = true;
-services.xserver.windowManager.herbstluftwm.enable = true;
-#services.xserver.desktopManager.xfce.enable = true;
-services.xserver.videoDrivers = [ "nvidia" ];
-services.xserver.libinput = {
-  enable = true;
-  naturalScrolling = false;
-};
-#services.xserver.synaptics.enable = true;
-services.compton = {
-	enable = true;
-	fade = false;
-	inactiveOpacity = "1.0";
-	shadow = false;
-};
- #  Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.permitRootLogin = "no";
-#services.tlp.enable = true;
-services.upower.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
-   services.printing.enable = true;
+ #  services.printing.enable = true;
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio ={
@@ -207,13 +132,6 @@ services.upower.enable = true;
   };
   # hardware services
    hardware.cpu.intel.updateMicrocode = true;
- # disable card with bbswitch by default since we turn it on only on demand!
- # hardware.nvidiaOptimus.disable = true;
-  # install nvidia drivers in addition to intel one
- # hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
- # hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
-# for steam:
-#hardware.opengl.driSupport32Bit = true;
 
 # Some bash programs
 programs.bash = {
@@ -221,23 +139,6 @@ programs.bash = {
 };
 programs.fish.enable=true;
 programs.vim.defaultEditor = true;
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable touchpad support.
-  # services.xserver.libinput.enable = true;
-
-  # Enable the KDE Desktop Environment.
-   #services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.guest = {
-  #   isNormalUser = true;
-  #   uid = 1000;
-  # };
 users.users.david = {
 	isNormalUser=true;
 	home = "/home/david";
@@ -251,5 +152,5 @@ users.users.david = {
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.03"; # Did you read the comment?
+  system.stateVersion = "19.09"; # Did you read the comment?
 }

@@ -10,23 +10,24 @@
         };
       };
 
-#  firefox = {
- #   enableAdobeFlash = true; # Chromium's non-NSAPI alternative to Adobe Flash
-  #:};
 };
   home= {
     packages =with pkgs; [
       (import ./vim.nix)
+          (import (fetchGit "https://github.com/haslersn/fish-nix-shell"))
+      obs-studio
       htop
+      slop
       xdotool
+      #allegro5
+      #gnutls
+      w3m
+      wmctrl
       xsv
       firefox-devedition-bin
       fff
       hexchat
       xclip
-      R
-      rPackages.knitr
-      rPackages.rmarkdown
       calcurse
       signal-desktop
       slack
@@ -44,6 +45,7 @@
       encryptr
       scid-vs-pc
       stockfish
+
 #      texlive.combined.scheme-full
 #pkgs.rstudio
   ];
@@ -139,30 +141,45 @@ services = {
 
       urgency_low = {
         background = "#d5d3c7";
-        foreground = "#705050";
-        frame_color = "#202421";
+        foreground = "#000000";
+        frame_color = "#5a7493";
         timeout = 5;
       };
 
       urgency_normal = {
         background = "#d5d3c7";
-        foreground = "#70a040";
-        frame_color = "#70a040";
+        foreground = "#000000";
+        frame_color = "#5a7493";
         timeout = 15;
       };
 
       urgency_critical = {
         background = "#d5d3c7";
-        foreground = "#705050";
-        frame_color = "#dd5633";
+        foreground = "#000000";
+        frame_color = "#5a7493";
         timeout = 0;
       };
 
       shortcuts = {
-        context = "ctrl+grave";
+        history = "ctrl+grave";
         close = "ctrl+space";
       };
-};
     };
-};
+
+
+#      scripts = [''
+#          [music]
+#          appname = "Spotify";
+#          summary = "Now playing";
+#          urgency = "critical";
+#        ''];
+    };
+
+  };
+  xdg.configFile."nixpkgs/config.nix".text = ''builtins.fromJSON '''${builtins.toJSON {
+
+    allowUnfree = true;
+
+  }}''''' ;
+
 }
