@@ -55,4 +55,4 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     "$panel" $monitor &
 done
 
-
+#xset s off -dpms

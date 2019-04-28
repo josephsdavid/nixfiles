@@ -77,6 +77,7 @@ hc keybind $Mod-Alt-Right spawn playerctl next
 
 #screenshots and recording
 hc keybind Print spawn scrot -e 'mv $f ~/Pictures/screenshots' 
+hc keybind Alt-Print spawn maim -s ~/Pictures/screenshots/$(date +%s).png
 
 #Focus
 hc keybind $Mod-Left  focus left

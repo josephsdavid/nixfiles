@@ -6,17 +6,17 @@
 # main monitor
 
 monitor=${1:-0}
-height=30
-hlpad=32
+height=25
+
+hlpad=25
 padding_top=0
 padding_bottom=0
-padding_left=0
+padding_left=5
 padding_right=${padding_left}
 bottom=0
 top=$height+$padding_top
 geometry=( $(herbstclient monitor_rect $monitor) )
 # geometry has the format: X Y W H
-nmon=$(herbstclient list_monitors | wc -l)
 	x="${geometry[0]}"
 	y="${geometry[1]}"
 	width="${geometry[2]}"

@@ -4,7 +4,6 @@ SETUVAR __fish_classic_git_prompt_initialized:\x1d
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
-SETUVAR _fish_abbr_6cord:\x7e/go/bin/6cord\x20\x2d\x2dconfig\x20\x7e/tmp/6cord\x2etoml
 SETUVAR _fish_abbr_cwtr:curl\x20https\x3a//wttr\x2ein/
 SETUVAR _fish_abbr_f:fff
 SETUVAR _fish_abbr_g:git
@@ -24,12 +23,10 @@ SETUVAR _fish_abbr_gr:git\x20remote
 SETUVAR _fish_abbr_gs:git\x20status
 SETUVAR _fish_abbr_gst:git\x20stash
 SETUVAR _fish_abbr_hc:herbstclient
-SETUVAR _fish_abbr_mksh:cat\x20/home/david/tmp/shell\x2enix\x20\x3e\x20shell\x2enix\x20\x26\x26\x20cat\x20/home/david/tmp/envrc\x20\x3e\x20\x2eenvrc
-SETUVAR _fish_abbr_pkglist:pacman\x20\x2dQqent\x20\x3e\x20paclist\x2etxt\x20\x26\x26\x20pacman\x20\x2dQqemt\x20\x3e\x20yaylist\x2etxt
-SETUVAR _fish_abbr_recreate:loadstate\x2esh\x3c\x7e/tmp/mystate
-SETUVAR _fish_abbr_reflect:sudo\x20reflector\x20\x2d\x2dcountry\x20US\x20\x2d\x2dprotocol\x20https\x20\x2d\x2dsort\x20rate\x20\x2d\x2dage\x2024\x20\x2d\x2dsave\x20/etc/pacman\x2ed/mirrorlist
-SETUVAR _fish_abbr_savestate:savestate\x2esh\x3e\x7e/tmp/mystate
-SETUVAR _fish_abbr_shn:cat\x20/home/david/tmp/shell\x2enix\x20\x3e\x20shell\x2enix\x20\x26\x26\x20cat\x20/home/david/tmp/envrc\x20\x3e\x20\x2eenvrc
+SETUVAR _fish_abbr_hme:home\x2dmanager\x20edit
+SETUVAR _fish_abbr_hms:home\x2dmanager\x20switch
+SETUVAR _fish_abbr_nrs:sudo\x20nixos\x2drebuild\x20switch
+SETUVAR _fish_abbr_vnc:sudoedit\x20/etc/nixos/configuration\x2enix
 SETUVAR abbrs_initialized:\x1d
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr

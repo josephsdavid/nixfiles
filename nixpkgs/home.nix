@@ -14,7 +14,14 @@
   home= {
     packages =with pkgs; [
       (import ./vim.nix)
-          (import (fetchGit "https://github.com/haslersn/fish-nix-shell"))
+      maim
+      slop
+      xclip
+      (import (fetchGit "https://github.com/haslersn/fish-nix-shell"))
+      shellcheck
+      haskellPackages.ghc 
+      haskellPackages.cabal-install
+      libreoffice-fresh
       obs-studio
       htop
       slop
@@ -24,8 +31,8 @@
       w3m
       wmctrl
       xsv
-      firefox-devedition-bin
       fff
+      firefox
       hexchat
       xclip
       calcurse

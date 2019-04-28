@@ -13,6 +13,7 @@ let customPlugins = {
 in vim_configurable.customize {
     name = "vim";
     vimrcConfig.customRC = ''
+      autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
       set relativenumber
       set number
       set backspace=indent,eol,start
@@ -75,23 +76,29 @@ inoremap $2 []<esc>i
 inoremap $3 {}<esc>i
         inoremap $4 {<esc>o}<esc>O
         iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
-        let g:NERDTreeWinPos = "left"
-      let NERDTreeShowHidden=0
-let NERDTreeIgnore = ['\.pyc$', '__pycache__']
-let g:NERDTreeWinSize=35
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
-map <leader>nf :NERDTreeFind<cr>
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_start_word_key      = '<C-s>'
-let g:multi_cursor_select_all_word_key = '<A-s>'
-let g:multi_cursor_start_key           = 'g<C-s>'
-let g:multi_cursor_select_all_key      = 'g<A-s>'
-let g:multi_cursor_next_key            = '<C-s>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-      let g:multi_cursor_quit_key = '<Esc>'
-      vmap Si S(i_<esc>f)
+let g:NetrwIsOpen=0
+
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i 
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+    endif
+endfunction
+map <leader>nn :call ToggleNetrw()<cr>
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 "let g:vimtex_view_method = 'zathura'
     '';
     # Use the default plugin list shipped with nixpkgs
@@ -104,13 +111,14 @@ let g:multi_cursor_skip_key            = '<C-x>'
             "Syntastic"
             "vim-nix"
             "surround"
-            "nerdtree"
+#            "nerdtree"
             "vim-markdown"
-            "vim-multiple-cursors"
             "vim-fugitive"
             #"vimtex"
+            "vim2hs"
             "ctrlp"
             "goyo"
+            "python-mode"
             "nvim-r"
         ]; }
     ];
