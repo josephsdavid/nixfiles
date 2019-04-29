@@ -29,6 +29,7 @@ services = {
 #    enable = true;
 #    package = pkgs.mongodb;
 #  };
+  
 
   xserver = {
     enable = true;
@@ -36,6 +37,7 @@ services = {
     windowManager = {
       herbstluftwm.enable = true;
     };
+
 
     videoDrivers = [ "nvidia" ];
     libinput = {

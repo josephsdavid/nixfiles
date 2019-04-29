@@ -13,7 +13,9 @@ hc() {
     herbstclient "$@"
 }
 hc emit_hook reload
-
+configdir="/home/david/.config/herbstluftwm"
+themedir=$configdir/"themes"
+paneldir=$configdir/"panels"
 # Clear dmenu cache, needed for nixos
 rm ~/.cache/dmenu_run
 
@@ -21,10 +23,11 @@ hc lock
 
 #Keybindings
 hc keyunbind --all
-. ~/.config/herbstluftwm/keybinds 
+$configdir/keybinds 
 
 #theming
-. ~/.config/herbstluftwm/theme
+#$themedir/moontheme
+$themedir/papertheme
 
 # rules
 hc unrule -F
@@ -43,16 +46,16 @@ hc detect_monitors
 # panel
 # find the panel
 nmon=$(herbstclient list_monitors | wc -l)
-if [ $nmon = "1" ]; then
-	panel=~/.config/herbstluftwm/lemonpanel.sh
+if [ "$nmon" = "1" ]; then
+	panel=$paneldir/lemonpanel.sh
 else
-	panel=~/.config/herbstluftwm/dzenpanel.sh
+	panel=$paneldir/dzenpanel.sh
 fi
 [ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
 for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     # start it on each monitor
 #    monitor=0
-    "$panel" $monitor &
+    "$panel" "$monitor" &
 done
 
 #xset s off -dpms

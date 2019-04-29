@@ -13,7 +13,7 @@
   imports =
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./direnv.nix
+#    ./direnv.nix
     ./services.nix
     ];
 
@@ -51,6 +51,7 @@ boot = {
 
   nix = {
     buildCores = 0;
+    maxJobs = 12;
     gc = {
       automatic = true;
       dates = "07:15";
@@ -70,7 +71,7 @@ boot = {
   environment.systemPackages = with pkgs; [
      wget 
      termite
-(let src = builtins.fetchGit "https://github.com/target/lorri"; in import src { inherit src pkgs; })
+#(let src = builtins.fetchGit "https://github.com/target/lorri"; in import src { inherit src pkgs; })
      ranger 
      vim
      gcc
@@ -95,6 +96,7 @@ boot = {
      noto-fonts-cjk
      noto-fonts-emoji
      liberation_ttf
+     inter
      fira-code
      fira-code-symbols
      mplus-outline-fonts
