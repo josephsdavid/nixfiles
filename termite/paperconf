@@ -46,14 +46,14 @@ cursor_shape = block
 #cursor_foreground = #d5d3c7
 
 # The foreground for selections
-cursor_foregroung =  #2f2f2f
+cursor_foreground =  #2f2f2f
 
 # The background for selections
 cursor = #93a1a1
 #foreground = #dcdccc
 foreground   =    #202421
 #foreground_bold = #ffffff
-background = #d5d3c7
+background = #fffffa
 
 # 20% background transparency (requires a compositor)
 #background = rgba(63, 63, 63, 0.8)
@@ -64,36 +64,36 @@ background = #d5d3c7
 # Colors from color0 to color254 can be set
 
 # black
-color0 =  #98b1a2
-color8 =  #709080
+color0 =  #eeeeee
+color8 =  #bcbcbc
 
 # red
-color1 =  #705050
-color9 =  #a57a7a
+color1 =  #af0000
+color9 =  #d70000
 
 # green
-color2 =  #57a37d
-color10=  #73715e
+color2 =  #008700
+color10=  #d70087
 
 # yellow
-color3 =  #896c58
-color11=  #67594b
+color3 =  #5f8700
+color11=  #8700af
 
 # blue
-color4 =  #506070
-color12=  #5a7493
+color4 =  #0087af
+color12=  #d75f00
 
 # magent
-color5 =  #d98ac0
-color13=  #ca7eb4
+color5 =  #878787
+color13=  #d7f500
 
 # cyan
-color6 =  #5a8688
-color14=  #3b5a5b
+color6 =  #005f87
+color14=  #005faf
 
 # white
-color7 =  #553344
-color15=  #221100
+color7 =  #444444
+color15=  #008700
 
 [hints]
 #font = Monospace 12
