@@ -47,9 +47,9 @@ hc detect_monitors
 # find the panel
 nmon=$(herbstclient list_monitors | wc -l)
 if [ "$nmon" = "1" ]; then
-	panel=$paneldir/lemonpanel.sh
+	panel=$paneldir/lemonpanel
 else
-	panel=$paneldir/dzenpanel.sh
+	panel=$paneldir/dzenpanel
 fi
 [ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
 for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do

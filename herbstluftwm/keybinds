@@ -128,7 +128,7 @@ hc keybind $Mod-Control-Right   resize right +$resizestep
 
 # Window Manipulations
 hc keybind $Mod-t floating toggle
-hc keybind $Mod-Shift-t spawn "$bindir"/floatsingle.sh
+hc keybind $Mod-Shift-t spawn "$bindir"/floatsingle
 hc keybind $Mod-f fullscreen toggle
 hc keybind $Mod-p pseudotile toggle
 
@@ -148,6 +148,7 @@ hc keybind $Mod-i jumpto urgent
 
 #Magic
 hc keybind $Mod-grave spawn "$bindir"/scratchpad
+hc keybind $Mod-s spawn "$bindir"/wselect
 
 #minimize and maximize windows
 hc keybind $Mod-m         spawn "$bindir"/minimize +1
