@@ -65,11 +65,14 @@ hc keybind $Mod-Return spawn termite -c ~/.config/termite/paperconf
 hc keybind $Mod-Shift-v spawn firefox
 
 # Volume control
-hc keybind  XF86AudioRaiseVolume spawn amixer set Master -q 1%+
-hc keybind  XF86AudioLowerVolume spawn amixer set Master -q 1%-
-hc keybind XF86AudioMute spawn amixer set Master toggle 
-hc keybind XF86MonBrightnessUp spawn xbacklight -inc 10
-hc keybind XF86MonBrightnessDown spawn xbacklight -dec 10
+#hc keybind  XF86AudioRaiseVolume spawn amixer set Master -q 1%+
+hc keybind  XF86AudioRaiseVolume  spawn /home/david/scripts/vol up
+hc keybind  XF86AudioLowerVolume spawn /home/david/scripts/vol down
+hc keybind XF86AudioMute spawn /home/david/scripts/vol mute
+#!lamixer set Master -q toggle 
+#/home/david/scripts/vol mute
+hc keybind XF86MonBrightnessUp spawn /home/david/scripts/bright up
+hc keybind XF86MonBrightnessDown spawn /home/david/scripts/bright down
 
 # Spotify control
 #hc keybind $Mod-Alt-Down spawn dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause

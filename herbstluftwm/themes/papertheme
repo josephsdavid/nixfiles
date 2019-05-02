@@ -24,7 +24,7 @@ hc set window_gap 6
 
 hc set frame_bg active color black
 hc set frame_bg normal color black
-hc set frame_active_opacity 10
+hc set frame_active_opacity 20
 hc set frame_normal_opacity 10
 
 hc attr theme.urgent.color orange
