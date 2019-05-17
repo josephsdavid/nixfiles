@@ -49,7 +49,6 @@ sm="%{F$RED}  %{F-}"
 sv="%{F$BLU}  %{F-}"
 sd="%{F$VLT}  %{F-}"
 
-source ~/.config/lemonbar/music
 # functions
 
 set -f

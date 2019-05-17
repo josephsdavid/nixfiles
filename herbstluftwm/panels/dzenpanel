@@ -20,9 +20,10 @@ panel_width=${geometry[2]}
 panel_height=32
 
 font="-*-fixed-medium-*-*-*-16-*-*-*-*-*-*-*"
-bgcolor=$(hc get frame_border_normal_color)
-selbg=$(hc get window_border_active_color)
-selfg='#101010'
+bgcolor=$(hc get window_border_normal_color)
+selbg=$(hc get frame_border_active_color)
+selfg='#87f000'
+emptybg=$(hc get frame_border_normal_color)
 
 ####
 # Try to find textwidth binary.
@@ -97,7 +98,7 @@ hc pad $monitor $panel_height
                     echo -n "^bg($selbg)^fg($selfg)"
                     ;;
                 '+')
-                    echo -n "^bg(#9CA668)^fg(#141414)"
+                    echo -n "^bg($emptybg)^fg(#ffffff)"
                     ;;
                 ':')
                     echo -n "^bg()^fg(#ffffff)"

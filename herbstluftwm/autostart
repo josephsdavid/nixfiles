@@ -13,14 +13,17 @@ hc() {
     herbstclient "$@"
 }
 hc emit_hook reload
+#hc set default_frame_layout 3
+#Max default
 configdir="/home/david/.config/herbstluftwm"
 themedir=$configdir/"themes"
 paneldir=$configdir/"panels"
+#bindir=$configdir/"bin"
 # Clear dmenu cache, needed for nixos
 rm ~/.cache/dmenu_run
 
 hc lock
-
+#hc spawn $bindir/dialoglistener
 #Keybindings
 hc keyunbind --all
 $configdir/keybinds 
@@ -29,7 +32,7 @@ $configdir/keybinds
 #$themedir/moontheme
 $themedir/papertheme
 
-# rules
+
 hc unrule -F
 #hc rule class=XTerm tag=3 # move all xterms to tag 3
 hc rule focus=on # normally focus new clients
@@ -38,6 +41,7 @@ hc rule focus=on # normally focus new clients
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
+# rules
 
 hc unlock
 

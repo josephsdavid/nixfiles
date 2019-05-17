@@ -43,4 +43,6 @@ hc set smart_window_surroundings 0
 hc set smart_frame_surroundings 1
 hc set mouse_recenter_gap 0
 
-feh --bg-fill ~/Pictures/Wallpapers/matwalp.jpg
+#feh --bg-fill ~/Pictures/Wallpapers/matwalp.jpg
+
+feh --randomize --bg-fill ~/Pictures/Wallpapers/papertheme/

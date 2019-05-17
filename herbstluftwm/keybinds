@@ -83,8 +83,8 @@ hc keybind $Mod-Alt-Right spawn playerctl next
 #hc keybind $Mod-Alt-Right spawn dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 
 #screenshots and recording
-hc keybind Print spawn scrot -e 'mv $f ~/Pictures/screenshots' 
-hc keybind Alt-Print spawn maim -s ~/Pictures/screenshots/"$(date +%s)".png
+hc keybind $Mod-Alt-p spawn scrot -e 'mv $f ~/Pictures/screenshots' 
+hc keybind $Mod-Shift-p spawn maim -s ~/Pictures/screenshots/"$(date +%s)".png
 
 #Focus
 hc keybind $Mod-Left  focus left
@@ -168,3 +168,7 @@ hc mousebind $Mod-Button1 move
 hc mousebind $Mod-Button2 zoom
 hc mousebind $Mod-Button3 resize
 hc set focus_follows_mouse 1
+
+# multimonitor
+hc keybind $Mod-Control-2 spawn /home/david/scripts/2monhome.sh
+hc keybind $Mod-Control-0 chain . spawn xrandr --auto . reload
