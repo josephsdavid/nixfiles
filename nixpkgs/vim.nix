@@ -4,8 +4,10 @@ let customPlugins = {
     name = "nvim-r";
     src = fetchgit {
       url= "https://github.com/jalvesaq/nvim-r";
-      rev =  "c53b5a402a26df5952718f483c7461af5bb459eb";
-      sha256 = "13xbb05gnpgmyaww6029saplzjq7cq2dxzlxylcynxhhyibz5ibv";
+      sha256 = "1d1vsl6i9dgbwj5ay4b6fkzxza7pi6f9m0v3s9936xm43mg73mbm";
+    #  sha256 = "1f7ha5sjjpdsj4qpimxdnbvw38vkp0c1jvnj1jcyid10dyg14y5k";
+     # rev =  "c53b5a402a26df5952718f483c7461af5bb459eb";
+     # sha256 = "13xbb05gnpgmyaww6029saplzjq7cq2dxzlxylcynxhhyibz5ibv";
       };
     buildInputs = [ which vim  zip];
   };
@@ -13,6 +15,7 @@ let customPlugins = {
 in vim_configurable.customize {
     name = "vim";
     vimrcConfig.customRC = ''
+      set clipboard=unnamedplus
       autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
       set relativenumber
       set number
@@ -120,6 +123,7 @@ let g:netrw_winsize = 25
             "goyo"
             "python-mode"
             "nvim-r"
+            "csv"
         ]; }
     ];
 }

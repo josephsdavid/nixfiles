@@ -6,7 +6,7 @@
 # main monitor
 
 monitor=${1:-0}
-height=28
+height=25
 
 hlpad=25
 padding_top=0
@@ -49,6 +49,7 @@ sm="%{F$RED}  %{F-}"
 sv="%{F$BLU}  %{F-}"
 sd="%{F$VLT}  %{F-}"
 
+source ~/.config/lemonbar/music
 # functions
 
 set -f

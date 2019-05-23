@@ -62,6 +62,7 @@ hc keybind $Mod-d spawn dmenu_run
 #hc keybind $Mod-Return spawn ${TERMINAL:-termite} # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-Return spawn termite -c ~/.config/termite/paperconf
 
+#hc keybind $Mod-Return spawn termite -c ~/.config/termite/cageconf
 hc keybind $Mod-Shift-v spawn firefox
 
 # Volume control

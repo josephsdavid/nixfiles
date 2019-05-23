@@ -31,6 +31,7 @@ $configdir/keybinds
 #theming
 #$themedir/moontheme
 $themedir/papertheme
+#$themedir/caged
 
 
 hc unrule -F

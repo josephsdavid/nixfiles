@@ -12,7 +12,7 @@ if not set -q abbrs_initialized
   abbr gcp 'git cherry-pick'
   abbr gd 'git diff'
   abbr gf 'git fetch'
-  abbr gl 'git log'
+  abbr gl git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit
   abbr gm 'git merge'
   abbr gp 'git push'
   abbr gpl 'git pull'
@@ -25,6 +25,7 @@ abbr hme 'home-manager edit'
 abbr hms 'home-manager switch'
 abbr vnc 'sudoedit /etc/nixos/configuration.nix'
 abbr nrs 'sudo nixos-rebuild switch'
+abbr updateDoom  '/home/david/.emacs.d/bin/doom -y re'
  alias f 'fff'
   echo 'Done'
 end
@@ -35,3 +36,7 @@ set fish_greeting
 set PATH ~/scripts $PATH
 # direnv hook fish  | source
 #eval (direnv hook fish)
+echo "Your To-Do list"
+cat /home/david/tmp/todo
+eval (direnv hook fish)
+

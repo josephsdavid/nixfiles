@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
 
   nixpkgs.config={
@@ -13,7 +12,12 @@
 };
   home= {
     packages =with pkgs; [
+      google-chrome
+      cachix
+      mpv
+      xorg.xdpyinfo
       (import ./vim.nix)
+      tree
       maim
       slop
       xclip
@@ -21,7 +25,7 @@
       shellcheck
       haskellPackages.ghc 
       haskellPackages.cabal-install
-      libreoffice-fresh
+      libreoffice
       obs-studio
       htop
       slop
@@ -33,6 +37,7 @@
       xsv
       fff
       firefox
+      qutebrowser
       hexchat
       xclip
       calcurse
@@ -46,12 +51,14 @@
       bc
       spotify
       libnotify
-      google-chrome
+      chromium
+      #google-chrome
       unzip
       p7zip
       encryptr
       scid-vs-pc
       stockfish
+      evince
 
 #      texlive.combined.scheme-full
 #pkgs.rstudio
