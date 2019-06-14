@@ -13,8 +13,9 @@
   imports =
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-#    ./direnv.nix
+    ./direnv.nix
     ./services.nix
+    ./cachix.nix
     ];
 
 boot = {
@@ -28,7 +29,9 @@ boot = {
     "modprobe"
   ];
   kernelPackages = pkgs.linuxPackages_latest;
+#  kernelPackages = pkgs.linuxPackages_4_19;
 };
+virtualisation.docker.enable = true;
   networking = {
     hostName = "nixon";
     networkmanager.enable = true;
@@ -69,34 +72,36 @@ boot = {
     VISUAL = "vim";
   };
   environment.systemPackages = with pkgs; [
-     wget 
-     termite
+    spotify
+    wget 
+    killall
+    termite
+    ranger 
+    vim
+    gcc
+    pandoc
+    neofetch 
+    git 
+    herbstluftwm 
+    compton 
+    dzen2 
+    feh 
+    arandr
+    acpi
+    tmux
+    imagemagick
+    lm_sensors
+    vlc
 #(let src = builtins.fetchGit "https://github.com/target/lorri"; in import src { inherit src pkgs; })
-     ranger 
-     vim
-     gcc
-     pandoc
-     neofetch 
-     git 
-     herbstluftwm 
-     compton 
-     dzen2 
-     feh 
-     arandr
-     acpi
-     tmux
-     imagemagick
-     lm_sensors
-     vlc
    ];
 
    fonts.fonts = with pkgs; [
-     nerdfonts
      iosevka
+     nerdfonts
+     siji
      noto-fonts-cjk
      noto-fonts-emoji
      liberation_ttf
-     inter
      fira-code
      fira-code-symbols
      mplus-outline-fonts
@@ -132,8 +137,21 @@ allowUnfree = true;
     enable = true;
     support32Bit = true;
   };
+
   # hardware services
-   hardware.cpu.intel.updateMicrocode = true;
+  hardware.cpu.intel.updateMicrocode = true;
+
+# attempt at OPTIMUS
+#hardware.bumblebee.enable = true;
+  # install nvidia drivers in addition to intel one
+  # disable card with bbswitch by default since we turn it on only on demand!
+  hardware.nvidiaOptimus.disable = true;
+  # install nvidia drivers in addition to intel one
+  hardware.opengl.driSupport32Bit = true;
+  hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
+  hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
+
+
 
 # Some bash programs
 programs.bash = {
@@ -147,12 +165,15 @@ users.users.david = {
 	description = "David Josephs";
         extraGroups = [ "wheel" "power" "networkmanager" "audio" "docker"];
         shell = "/run/current-system/sw/bin/fish";
-};
+      };
+
+
+      
 
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.09"; # Did you read the comment?
+  system.stateVersion = "19.03"; # Did you read the comment?
 }

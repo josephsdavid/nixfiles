@@ -102,7 +102,11 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
-"let g:vimtex_view_method = 'zathura'
+      "let g:vimtex_view_method = 'zathura'
+      autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
+      let g:vim_markdown_folding_disabled = 1
+      let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
     '';
     # Use the default plugin list shipped with nixpkgs
     vimrcConfig.vam.knownPlugins = pkgs.vimPlugins // customPlugins;

@@ -1,9 +1,13 @@
 { config, pkgs, ... }:
 {
-services = {
-  openssh = {
-    enable = true;
-    permitRootLogin = "no";
+  networking.dhcpcd.enable = true;
+  services = {
+    #emacs = {
+     # enable = true;
+   # };
+    openssh = {
+      enable = true;
+      permitRootLogin = "no";
   };
 
   printing = {
@@ -16,7 +20,7 @@ services = {
 
   # DAtabases
 #  neo4j = {
-#    enable = true;
+#   enable = true;
 #    package = pkgs.neo4j;
 #  };
 
@@ -38,8 +42,16 @@ services = {
       herbstluftwm.enable = true;
     };
 
+#    desktopManager = {
+#      xfce.enable =true;
+#      gnome3.enable = true;
+#    };
 
-    videoDrivers = [ "nvidia" ];
+
+
+#    videoDrivers = [ "nvidia" ];
+
+    videoDrivers = [ "intel" ];
     libinput = {
       enable = true;
       naturalScrolling = false;

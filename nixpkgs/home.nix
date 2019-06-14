@@ -12,7 +12,6 @@
 };
   home= {
     packages =with pkgs; [
-      google-chrome
       cachix
       mpv
       xorg.xdpyinfo
@@ -49,7 +48,6 @@
       zoom-us
       dmenu
       bc
-      spotify
       libnotify
       chromium
       #google-chrome

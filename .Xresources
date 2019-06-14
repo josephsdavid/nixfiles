@@ -1,0 +1,61 @@
+!! Colorscheme
+
+! special
+*.foreground: #202421
+*.background: #fffffa
+*.cursorColor: #2f2f2f
+
+! black
+*.color0:  #eeeeee
+*.color8:  #bcbcbc
+
+! red
+*.color1:  #af0000
+*.color9:  #d70000
+
+! green
+*.color2:  #008700
+*.color10:  #d70087
+
+! yellow
+*.color3:  #5f8700
+*.color11:  #8700af
+
+! blue
+*.color4:  #0087af
+*.color12:  #d75f00
+
+! magent
+*.color5:  #878787
+*.color13:  #d7f500
+
+! cyan
+*.color6:  #005f87
+*.color14:  #005faf
+
+! white
+*.color7:  #444444
+*.color15:  #008700A
+xterm*font: xft: Iosevka Nerd Font:style=Medium:size=11;2
+xterm*boldfont: xft: Iosevka Nerd Font:style=Medium:size=11;2
+xterm*saveLines: 2000
+
+xterm*VT100.Translations: #override \
+    Ctrl <Key> minus: smaller-vt-font() \n\
+    Ctrl <Key> plus: larger-vt-font() \n\
+    Ctrl <Key> 0: set-vt-font(d)
+
+xterm*renderFont: true
+
+! VT Font Menu: Unreadable
+xterm*faceSize1: 6
+! VT font menu: Tiny
+xterm*faceSize2: 10
+! VT font menu: Medium
+xterm*faceSize3: 12
+! VT font menu: Large
+xterm*faceSize4: 16
+! VT font menu: Huge
+xterm*faceSize5: 22
+
+xterm*faceSize: 12

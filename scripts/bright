@@ -19,7 +19,7 @@ function send_notification {
   # https://en.wikipedia.org/wiki/Box-drawing_character
   bar=$(seq -s "─" 0 $((brightness / 5)) | sed 's/[0-9]//g')
   # Send the notification
-  /home/david/scripts/popup   "    $bar"
+  /home/david/scripts/popup   "%{c}$bar"
 }
 
 case $1 in

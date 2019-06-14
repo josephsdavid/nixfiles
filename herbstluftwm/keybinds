@@ -60,8 +60,8 @@ hc keybind $Mod-Shift-c close_or_remove
 hc keybind $Mod-d spawn dmenu_run
 
 #hc keybind $Mod-Return spawn ${TERMINAL:-termite} # use your $TERMINAL with xterm as fallback
-hc keybind $Mod-Return spawn termite -c ~/.config/termite/paperconf
-
+#hc keybind $Mod-Return spawn termite -c ~/.config/termite/paperconf
+hc keybind $Mod-Return spawn xterm
 #hc keybind $Mod-Return spawn termite -c ~/.config/termite/cageconf
 hc keybind $Mod-Shift-v spawn firefox
 
@@ -173,3 +173,7 @@ hc set focus_follows_mouse 1
 # multimonitor
 hc keybind $Mod-Control-2 spawn /home/david/scripts/2monhome.sh
 hc keybind $Mod-Control-0 chain . spawn xrandr --auto . reload
+
+# stupid little scripts
+# Broken: hc keybind $Mod-Shift-l spawn /home/david/scripts/locker.sh
+hc keybind $Mod-Shift-n spawn networkmanager_dmenu 
