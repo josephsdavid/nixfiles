@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
-
   nixpkgs.config={
+    oraclejdk.accept_license = true;
     allowUnfree = true;
       packageOverrides = pkgs: {
         nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
@@ -12,7 +12,21 @@
 };
   home= {
     packages =with pkgs; [
-      cachix
+      networkmanager_dmenu
+      python37
+      gnome3.gnome-software
+      gnome3.gnome-tweaks
+      python37Packages.ipython
+      cpufrequtils
+      xsel
+      processing
+      gcc
+      cmake
+      pango
+      gnumake
+      texlive.combined.scheme-full
+      usbutils
+      stack
       mpv
       xorg.xdpyinfo
       (import ./vim.nix)
@@ -22,8 +36,6 @@
       xclip
       (import (fetchGit "https://github.com/haslersn/fish-nix-shell"))
       shellcheck
-      haskellPackages.ghc 
-      haskellPackages.cabal-install
       libreoffice
       obs-studio
       htop
@@ -50,13 +62,15 @@
       bc
       libnotify
       chromium
-      #google-chrome
+      google-chrome
       unzip
       p7zip
       encryptr
       scid-vs-pc
       stockfish
       evince
+      go
+      git-lfs
 
 #      texlive.combined.scheme-full
 #pkgs.rstudio
@@ -120,7 +134,7 @@ services = {
     longitude = "-96.796989";
     brightness = {
       day = "1";
-      night = "0.8";
+      night = "0.85";
     };
   #  temperature = {
    #   day = 6500;
@@ -176,6 +190,11 @@ services = {
         history = "ctrl+grave";
         close = "ctrl+space";
       };
+      music = {
+        appname = "Spotify";
+        summary = "Now playing";
+        urgency =  "low";
+      };
     };
 
 
@@ -191,6 +210,7 @@ services = {
   xdg.configFile."nixpkgs/config.nix".text = ''builtins.fromJSON '''${builtins.toJSON {
 
     allowUnfree = true;
+    oraclejdk.accept_license = true;
 
   }}''''' ;
 

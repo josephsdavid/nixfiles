@@ -15,7 +15,7 @@
     ./hardware-configuration.nix
     ./direnv.nix
     ./services.nix
-    ./cachix.nix
+    #./cachix.nix
     ];
 
 boot = {
@@ -27,6 +27,7 @@ boot = {
     "coretemp"
     "kvm-intel"
     "modprobe"
+    "nvidia_uvm"
   ];
   kernelPackages = pkgs.linuxPackages_latest;
 #  kernelPackages = pkgs.linuxPackages_4_19;
@@ -91,6 +92,7 @@ virtualisation.docker.enable = true;
     tmux
     imagemagick
     lm_sensors
+    cacert
     vlc
 #(let src = builtins.fetchGit "https://github.com/target/lorri"; in import src { inherit src pkgs; })
    ];
@@ -98,10 +100,16 @@ virtualisation.docker.enable = true;
    fonts.fonts = with pkgs; [
      iosevka
      nerdfonts
+     fira
+     cabin
      siji
      noto-fonts-cjk
      noto-fonts-emoji
      liberation_ttf
+     cooper-hewitt
+     manrope
+     quattrocento
+     quattrocento-sans
      fira-code
      fira-code-symbols
      mplus-outline-fonts
@@ -111,7 +119,8 @@ virtualisation.docker.enable = true;
 # Now let us configure our packages!
 #
   nixpkgs.config = {
-allowUnfree = true;
+    allowUnfree = true;
+    oraclejdk.accept_license = true;
     firefox = {
      enableAdobeFlash = true;
   };
@@ -138,18 +147,24 @@ allowUnfree = true;
     support32Bit = true;
   };
 
+  hardware.bluetooth = {
+    enable = false;
+    powerOnBoot = false;
+  };
+
   # hardware services
   hardware.cpu.intel.updateMicrocode = true;
 
 # attempt at OPTIMUS
 #hardware.bumblebee.enable = true;
-  # install nvidia drivers in addition to intel one
-  # disable card with bbswitch by default since we turn it on only on demand!
-  hardware.nvidiaOptimus.disable = true;
-  # install nvidia drivers in addition to intel one
-  hardware.opengl.driSupport32Bit = true;
-  hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
-  hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
+#  # install nvidia drivers in addition to intel one
+#  # disable card with bbswitch by default since we turn it on only on demand!
+#  # its CUDA time
+#   hardware.nvidiaOptimus.disable = true;
+#  # install nvidia drivers in addition to intel one
+#   hardware.opengl.driSupport32Bit = true;
+#   hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
+#   hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
 
 
 
@@ -170,10 +185,9 @@ users.users.david = {
 
       
 
-
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.03"; # Did you read the comment?
+  system.stateVersion = "19.09"; # Did you read the comment?
 }

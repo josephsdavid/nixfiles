@@ -58,10 +58,12 @@ hc keybind $Mod-Shift-c close_or_remove
 # Birth
 
 hc keybind $Mod-d spawn dmenu_run
+hc keybind $Mod-equal spawn ~/scripts/dcalc
 
 #hc keybind $Mod-Return spawn ${TERMINAL:-termite} # use your $TERMINAL with xterm as fallback
+hc keybind $Mod-Return spawn termite -c ~/.config/termite/snowconf
 #hc keybind $Mod-Return spawn termite -c ~/.config/termite/paperconf
-hc keybind $Mod-Return spawn xterm
+#hc keybind $Mod-Return spawn xterm
 #hc keybind $Mod-Return spawn termite -c ~/.config/termite/cageconf
 hc keybind $Mod-Shift-v spawn firefox
 
@@ -85,7 +87,11 @@ hc keybind $Mod-Alt-Right spawn playerctl next
 
 #screenshots and recording
 hc keybind $Mod-Alt-p spawn scrot -e 'mv $f ~/Pictures/screenshots' 
-hc keybind $Mod-Shift-p spawn maim -s ~/Pictures/screenshots/"$(date +%s)".png
+
+hc keybind $Mod-Shift-p spawn bash /home/david/scripts/names.sh
+hc keybind $Mod-Shift-f spawn /home/david/scripts/blaze 
+hc keybind $Mod-Ctrl-f spawn /home/david/scripts/blaze -p preset
+hc keybind $Mod-Alt-f spawn /home/david/scripts/blaze -s
 
 #Focus
 hc keybind $Mod-Left  focus left

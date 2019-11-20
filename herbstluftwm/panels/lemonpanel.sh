@@ -10,7 +10,7 @@ height=25
 
 hlpad=25
 padding_top=0
-padding_bottom=0
+padding_bottom=8
 padding_left=5
 padding_right=${padding_left}
 bottom=0
@@ -30,7 +30,7 @@ function uniq_linebuffered() {
 herbstclient pad $monitor $hlpad
 # settings
 RES="x16xx"
-FONT="-*-fixed-medium-*-*-*-14-*-*-*-*-*-*-*"
+FONT="-*-fixed-medium-*-*-*-12-*-*-*-*-*-*-*"
 FONT2="-*-envy-code-r-*-*-6-*-*-*-*-*-*-*"
 FONT3="-*-envy-code-r-*-*-6-*-*-*-*-*-*-*"
 

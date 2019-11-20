@@ -34,9 +34,13 @@ fish-nix-shell --info-right | source
 set fish_greeting
 
 set PATH ~/scripts $PATH
+set PATH ~/.local/bin $PATH
 # direnv hook fish  | source
 #eval (direnv hook fish)
 echo "Your To-Do list"
 cat /home/david/tmp/todo
 eval (direnv hook fish)
 
+# THEME PURE #
+set fish_function_path /home/david/.config/fish/functions/theme-pure/functions/ $fish_function_path
+source /home/david/.config/fish/functions/theme-pure/conf.d/pure.fish
