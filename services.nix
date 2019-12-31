@@ -2,12 +2,19 @@
 {
   networking.dhcpcd.enable = true;
   services = {
+    dbus = {
+      packages = [pkgs.gnome3.dconf];
+    };
     #emacs = {
      # enable = true;
    # };
    openssh = {
      enable = true;
      permitRootLogin = "no";
+   };
+
+   flatpak = {
+     enable = true;
    };
 
    printing = {
@@ -46,12 +53,16 @@ udev.extraRules =
   enable = true;
 
   windowManager = {
-  herbstluftwm.enable = true;
+    herbstluftwm.enable = true;
+    fvwm = {
+      enable = true;
+      gestures = true;
+    };
   };
 
   desktopManager = {
     #  dde.enable =true;
-      #gnome3.enable = true;
+      gnome3.enable = true;
 };
 
 

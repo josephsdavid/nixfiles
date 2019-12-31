@@ -15,7 +15,6 @@
     ./hardware-configuration.nix
     ./direnv.nix
     ./services.nix
-    #./cachix.nix
     ];
 
 boot = {
@@ -23,6 +22,7 @@ boot = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
+
   kernelModules = [ 
     "coretemp"
     "kvm-intel"
@@ -32,7 +32,9 @@ boot = {
   kernelPackages = pkgs.linuxPackages_latest;
 #  kernelPackages = pkgs.linuxPackages_4_19;
 };
-virtualisation.docker.enable = true;
+virtualisation.docker = {
+  enable = true;
+};
   networking = {
     hostName = "nixon";
     networkmanager.enable = true;
@@ -73,8 +75,62 @@ virtualisation.docker.enable = true;
     VISUAL = "vim";
   };
   environment.systemPackages = with pkgs; [
+    gnome3.gnome-bluetooth
+    cachix
+    capitaine-cursors
+    light
     spotify
     wget 
+    mojave-gtk-theme
+    nordic
+    nordic-polar
+    sierra-gtk-theme
+    gnome3.gnome-tweaks
+    adementary-theme
+    ant-theme
+    arc-icon-theme
+    arc-theme
+    clearlooks-phenix
+    e17gtk
+    elementary-xfce-icon-theme
+    equilux-theme
+    greybird
+    numix-icon-theme
+    numix-icon-theme-circle
+    onestepback
+    pantheon.elementary-gtk-theme
+    pantheon.elementary-icon-theme
+    pantheon.elementary-sound-theme
+    cawbird
+    gnomeExtensions.clipboard-indicator
+    gnomeExtensions.window-corner-preview
+    gnomeExtensions.timepp
+    theme-vertex
+    zuki-themes
+    gnome-themes-extra
+    gnome3.gnome-backgrounds
+    gnome3.gnome-calculator
+    gnome3.gnome-weather
+    gnomecast
+    materia-theme
+    planner
+    stilo-themes
+    gnome3.gnome-shell
+    gnome3.gnome-shell-extensions
+    gnome3.gnome-software
+    gnome3.dconf-editor
+    gnomeExtensions.dash-to-panel
+    gnomeExtensions.dash-to-dock
+    deepin.deepin-icon-theme
+    deepin.deepin-sound-theme
+    pantheon.elementary-sound-theme
+    faba-icon-theme
+    maia-icon-theme
+    material-design-icons
+    material-icons
+    nixos-icons
+    paper-icon-theme
+    lxappearance
     killall
     termite
     ranger 
@@ -100,6 +156,10 @@ virtualisation.docker.enable = true;
    fonts.fonts = with pkgs; [
      iosevka
      nerdfonts
+     tamsyn
+     tewi-font
+     ucs-fonts
+     spleen
      fira
      cabin
      siji
@@ -114,6 +174,16 @@ virtualisation.docker.enable = true;
      fira-code-symbols
      mplus-outline-fonts
      proggyfonts
+     cherry
+     comfortaa
+     dejavu_fonts
+     envypn-font
+     fantasque-sans-mono
+     luculent
+     meslo-lg
+     montserrat
+     noto-fonts
+     open-sans
      lemon
 	];
 # Now let us configure our packages!
@@ -134,7 +204,7 @@ virtualisation.docker.enable = true;
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-
+  programs.dconf.enable = true;
   # List services that you want to enable:
   powerManagement.cpuFreqGovernor = "performance";
 
@@ -145,11 +215,21 @@ virtualisation.docker.enable = true;
   hardware.pulseaudio ={
     enable = true;
     support32Bit = true;
+    extraModules = [pkgs.pulseaudio-modules-bt];
   };
 
   hardware.bluetooth = {
-    enable = false;
-    powerOnBoot = false;
+    enable = true;
+
+    extraConfig = ''
+    [General]
+    ControllerMode = bredr
+    '';
+
+
+    package = pkgs.bluezFull;
+  
+    #powerOnBoot = false;
   };
 
   # hardware services
@@ -178,7 +258,7 @@ users.users.david = {
 	isNormalUser=true;
 	home = "/home/david";
 	description = "David Josephs";
-        extraGroups = [ "wheel" "power" "networkmanager" "audio" "docker"];
+        extraGroups = [ "wheel" "power" "networkmanager" "audio" "docker" "flatpak"];
         shell = "/run/current-system/sw/bin/fish";
       };
 

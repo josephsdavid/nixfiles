@@ -23,11 +23,12 @@ y=${geometry[1]}
 panel_width=${geometry[2]}
 panel_height=32
 
-font="-*-fixed-medium-*-*-*-16-*-*-*-*-*-*-*"
-bgcolor='#364d63'
-selbg='#156faf'
-selfg='#ffffff'
-emptybg=$(hc get frame_border_normal_color)
+font="-*-tamsyn-*-*-*-*-17-*-*-*-*-*-*-*"
+bgcolor='#330000'
+selbg='#ffffff'
+selfg='#ff0033'
+emptybg='#ae5865'
+#$(hc get frame_border_normal_color)
 
 ####
 # Try to find textwidth binary.
