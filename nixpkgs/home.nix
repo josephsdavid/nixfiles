@@ -101,6 +101,8 @@ let
     packages =with pkgs; [
       ncat
       weechat
+      jre
+      jdk
       skypeforlinux
       vscode
       networkmanager_dmenu
@@ -223,7 +225,7 @@ fzf = {
       longitude = "-96.796989";
       brightness = {
         day = "1";
-        night = "0.85";
+        night = "0.7";
       };
   #  temperature = {
    #   day = 6500;
