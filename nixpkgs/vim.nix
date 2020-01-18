@@ -19,7 +19,7 @@ let customPlugins = {
    name = "vim-pandoc-syntax";
    src = fetchgit {
      url = "https://github.com/vim-pandoc/vim-pandoc-syntax";
-     sha256 ="0bvrkflryzb43xg5s9kiksk7nslgrqpybasz4grjv6lnmzis7x97";
+     sha256 ="04hmcqag21fmb3flabbhybp6s8ysf3rxr05kxqdlln4wamimag81";
    };
  };
 
@@ -43,7 +43,8 @@ let customPlugins = {
    name = "lightline";
    src = fetchgit {
      url = "https://github.com/itchyny/lightline.vim";
-     sha256 ="0ymb55gln97xzq94slghrmyrvn10jnh6547ci44gw1lq655c7wvb";
+     sha256 ="0qrz4nwb4imnxiqk3p1r4sxib1gjicpsr3g6l8mdgw806l1jc9mg";
+
    };
  };
 

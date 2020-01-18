@@ -1,4 +1,6 @@
 " plugins I love and use, ones marked in star are amazing and you should have:
+" I use nix for plugins but i think vim-plug, vundle, and pathogen are nice,
+" dein.vim is apparently nice too
             "repeat"
             "auto-pairs" * very useful
             "Syntastic"

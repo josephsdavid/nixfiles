@@ -15,6 +15,7 @@
     ./hardware-configuration.nix
     ./direnv.nix
     ./services.nix
+    ./cachix.nix
     ];
 
 boot = {
@@ -75,7 +76,6 @@ virtualisation.docker = {
     VISUAL = "vim";
   };
   environment.systemPackages = with pkgs; [
-    gnome3.gnome-bluetooth
     cachix
     capitaine-cursors
     light
@@ -102,22 +102,14 @@ virtualisation.docker = {
     pantheon.elementary-icon-theme
     pantheon.elementary-sound-theme
     cawbird
-    gnomeExtensions.clipboard-indicator
-    gnomeExtensions.window-corner-preview
-    gnomeExtensions.timepp
     theme-vertex
     zuki-themes
     gnome-themes-extra
-    gnome3.gnome-backgrounds
-    gnome3.gnome-calculator
-    gnome3.gnome-weather
-    gnomecast
     materia-theme
     planner
     stilo-themes
     gnome3.gnome-shell
     gnome3.gnome-shell-extensions
-    gnome3.gnome-software
     gnome3.dconf-editor
     gnomeExtensions.dash-to-panel
     gnomeExtensions.dash-to-dock
@@ -130,7 +122,6 @@ virtualisation.docker = {
     material-icons
     nixos-icons
     paper-icon-theme
-    lxappearance
     killall
     termite
     ranger 
@@ -152,6 +143,7 @@ virtualisation.docker = {
     vlc
 #(let src = builtins.fetchGit "https://github.com/target/lorri"; in import src { inherit src pkgs; })
    ];
+
 
    fonts.fonts = with pkgs; [
      iosevka
@@ -185,7 +177,14 @@ virtualisation.docker = {
      noto-fonts
      open-sans
      lemon
-	];
+   ];
+
+   fonts.fontconfig = {
+     defaultFonts = {
+       sansSerif = ["Fira Sans"];
+       monospace = ["Iosevksa Term"];
+     };
+   };
 # Now let us configure our packages!
 #
   nixpkgs.config = {
@@ -220,11 +219,6 @@ virtualisation.docker = {
 
   hardware.bluetooth = {
     enable = true;
-
-    extraConfig = ''
-    [General]
-    ControllerMode = bredr
-    '';
 
 
     package = pkgs.bluezFull;
