@@ -32,6 +32,7 @@ autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType r setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType rmd setlocal expandtab shiftwidth=2 softtabstop=2
 
+" Run currently focused python script with F9
 autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 
 " relative numbering on the number line for conveneient jumping
